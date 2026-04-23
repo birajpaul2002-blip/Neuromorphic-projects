@@ -26,3 +26,7 @@ Copy the three `.py` files into the root of your YOLO26 repo (same place you run
 - This code distills the multi-scale neck features that feed the Detect head.
 - If your YOLO26 build differs from the standard Ultralytics graph, you may need to set `kd_hook_indices=[...]` manually.
 - The goal is to narrow the gap to the teacher while keeping YOLO26n latency unchanged. Exact teacher-level accuracy is not guaranteed.
+
+##Original Model Weights are needed to set up before KD
+https://drive.google.com/file/d/1oo48M7Sagi9Ru5w9koEk-UXY_wlqj1Kl/view?usp=sharing 
+
