@@ -3,11 +3,12 @@ Improving Latency in Bird Detection on Edge  Devices
 # ReviewKD for YOLO26x -> YOLO26n (Ultralytics-style)
 
 Files:
-- 'Precompute_teacher_features.py': Load YOLO26-X teacher, freeze it (it won't learn anymore).
+- `Precompute_teacher_features.py`: Load YOLO26-X teacher, freeze it (it won't learn anymore).
 - `reviewkd_modules.py`: ABF, HCL, feature hooks, channel inference.
 - `Offline_reviewkd_trainer.py`: custom DetectionModel + DetectionTrainer for ReviewKD.
 - `train_offline.py`: example training entrypoint.
-
+- `run_offline.slurm`: Run in the background on HPC. 
+- `26Nval_distilled`: test the distilled model.
 ## Where to place these files
 
 Copy the three `.py` files into the root of your YOLO26 repo (same place you run training from), then edit the paths in `train_offline.py`.
