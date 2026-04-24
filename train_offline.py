@@ -13,8 +13,7 @@ DATA_YAML = "/work/biraj/neuromorphic/trainval_dataset.yaml"
 FEATURES_DIR = "/work/biraj/neuromorphic/teacher_features"
 
 # Teacher channel sizes for YOLO26-X at layers [16, 19, 22]
-# You need to check these once — run precompute script and it prints feature shapes
-# Typical values for YOLO26-X: [320, 640, 640] — verify and update
+
 TEACHER_CHANNELS = [384, 768, 768]
 
 # --------------------------------------------------
