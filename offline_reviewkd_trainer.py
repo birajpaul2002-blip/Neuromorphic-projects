@@ -1,6 +1,5 @@
 """
-Offline ReviewKD trainer — uses pre-computed teacher features from disk.
-NO teacher model on GPU during training = no memory issues.
+Offline Review KD trainer. uses pre-computed teacher features from disk.
 """
 from __future__ import annotations
 
@@ -98,9 +97,8 @@ class OfflineReviewKDTrainer(DetectionTrainer):
                     for im_file in batch["im_file"]:
                         stem = Path(im_file).stem
                         feat_path = os.path.join(trainer.features_dir, f"{stem}.pt")
-                        # weights_only=False recommended for lists of tensors in newer PyTorch versions
                         feats = torch.load(feat_path, map_location=trainer.device, weights_only=False)
-                        # Explicitly detach so they don't hold onto any graph references
+                        
                         teacher_feats.append([f.float().detach() for f in feats])
                 except FileNotFoundError:
                     return base_loss, loss_items
@@ -131,9 +129,6 @@ class OfflineReviewKDTrainer(DetectionTrainer):
 
     def save_model(self):
         """
-        Overrides the save method to cleanly swap out the KD loss closure.
-        If we don't do this, PyTorch deepcopies the `trainer` object inside the closure,
-        which copies the optimizer and its history, causing an instant OOM.
         """
         # 1. Store the current customized loss functions
         model_loss = getattr(self.model, "loss", None)
