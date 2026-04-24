@@ -143,7 +143,7 @@ class OfflineReviewKDTrainer(DetectionTrainer):
         if self.student_tap is not None:
             self.student_tap.close()
 
-        # 4. Save safely (no massive closure being deepcopied)
+        # 4. Save safely 
         try:
             return super().save_model()
         finally:
