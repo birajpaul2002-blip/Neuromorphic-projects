@@ -1,8 +1,4 @@
-"""
-Step 1: Pre-compute and cache teacher features to disk.
-Run this ONCE before training. Teacher model is loaded on GPU briefly,
-features are computed per image, saved to disk, then teacher is freed.
-"""
+
 from __future__ import annotations
 
 import os
