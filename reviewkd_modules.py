@@ -15,10 +15,6 @@ def _as_tensor(x: Union[torch.Tensor, Sequence[torch.Tensor]]) -> torch.Tensor:
         raise TypeError(f"Expected Tensor or tuple/list of Tensors, got {type(x)}")
     return x
 
-
-# ---------------------------------------------------------
-# TOP-LEVEL CLASS: Fully picklable hook to survive torch.save
-# ---------------------------------------------------------
 class DictHook:
     def __init__(self, target_dict: dict, idx: int):
         self.target_dict = target_dict
@@ -61,10 +57,6 @@ class FeatureTap:
 class ABF(nn.Module):
     """
     Attention-Based Fusion block from ReviewKD.
-
-    This implementation is adapted to detector feature maps. It aligns channels,
-    fuses residual higher-level information, and emits the reviewed feature used
-    by the KD loss.
     """
 
     def __init__(self, in_channel: int, mid_channel: int, out_channel: int, fuse: bool):
@@ -110,9 +102,6 @@ class ABF(nn.Module):
 class ReviewKDAdapter(nn.Module):
     """
     ReviewKD adapter over a list of multi-scale student features.
-
-    Student features are recursively fused from deep-to-shallow and projected into
-    the teacher channel dimensions before HCL is applied.
     """
 
     def __init__(self, student_channels: Sequence[int], teacher_channels: Sequence[int], mid_channel: int = 256):
@@ -143,8 +132,6 @@ class ReviewKDAdapter(nn.Module):
 class HCLLoss(nn.Module):
     """
     Hierarchical Context Loss from ReviewKD.
-
-    Computes feature MSE at the original resolution and additional pooled scales.
     """
 
     def __init__(self, pool_sizes: Sequence[int] = (8,4, 2, 1)):
