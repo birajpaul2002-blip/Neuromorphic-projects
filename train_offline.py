@@ -1,6 +1,4 @@
 """
-Step 2: Train student N with pre-computed teacher features.
-Run this AFTER precompute_teacher_features.py has finished.
 """
 from __future__ import annotations
 
